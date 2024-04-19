@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -11,26 +11,19 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
-  username: string = '';
-  password: string = '';
 
-  constructor() { }
+export class ProfileComponent implements OnInit {
+  userEmail: string | undefined;
 
-  login(): void {
-    // Here you can add your login logic
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
-    
-    // For demonstration purposes, let's assume login is successful
-    alert('Login successful!');
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.userEmail = localStorage.getItem('user') ?? undefined;
   }
 
   logout(): void {
-    // Here you can add your logout logic
-    this.username = '';
-    this.password = '';
-    alert('Logged out!');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userType');
+    this.router.navigateByUrl('/login');
   }
 }
-

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -11,4 +11,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class SettingsComponent {
 
-}
+
+    constructor(private router: Router) {}
+  
+    logout(): void {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userType');
+      this.router.navigateByUrl('/login');
+    }
+  }
+

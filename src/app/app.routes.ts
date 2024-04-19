@@ -3,8 +3,8 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { authGuard } from './auth.guard';
-import { adminGuard } from './admin.guard';
+import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin.guard';
 
 
 export const routes: Routes = [
@@ -15,16 +15,17 @@ export const routes: Routes = [
     {
         path: 'dashboard-component',
         component: DashboardComponent,
-        canActivate:[authGuard]
+        canActivate:[AuthGuard]
     },
     {
         path: 'profile-component',
         component: ProfileComponent,
-        canActivate:[adminGuard]
     },
     
     {
         path: 'settings-component',
         component: SettingsComponent,
+        canActivate: [AdminGuard] 
+        
     },
 ];
